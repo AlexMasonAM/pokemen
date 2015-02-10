@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app>
+<html ng-app='pokeApp'>
   <head>
     <meta charset="utf-8">
 
@@ -8,9 +8,27 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/pokecontroller.js"></script>
   </head>
 
-  <body>
-    {{ 84 / 2 }}
+  <body ng-controller='PokeController as poke'>
+    <p>
+      PokeName: {{ poke.name }}
+    </p>
+    <p>
+      Abilities: 
+      <ul>
+        <li ng-repeat="ability in poke.abilities">
+          {{ ability.name }}
+        </li>
+      </ul>  
+      <div ng-repeat="image in poke.images"> 
+        <img ng-src="{{ image }}">
+      </div>
+    </p>
+    <form  ng-submit="poke.getPokemon()">
+      <input ng-model="poke.pokeNumber" ng-change="poke.getPokemon()">
+      <input type="submit" placeholder="enter a number" value="Discover a Pokemon">
+    </form>
   </body>
 </html>
